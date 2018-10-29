@@ -26,7 +26,6 @@ export class UserpopoverPage {
   }
   loaduser(){
     this.storage.get("user").then(val=>{
-      // this.header_data.user = val;
       this.user = val;
 
     })
@@ -47,6 +46,7 @@ logout(){
     this.gCrtl.getpost(url).then(data=>{
       this.gCrtl.dismissloadin();
       let val = JSON.parse(data.data)
+      console.log(JSON.stringify(data));
       if(val.code=="0"){
         this.gCrtl.showAlert(val.prenom +" "+val.nom+" votre carte expire dans "+val.validite+"jour(s)")
       }
