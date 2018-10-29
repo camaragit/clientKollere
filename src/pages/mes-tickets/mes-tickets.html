@@ -1,0 +1,51 @@
+
+<ion-header>
+
+ <ion-navbar color="kollere">
+   <button ion-button="" menuToggle="">
+     <ion-icon name="menu"></ion-icon>
+
+   </button>
+    <ion-title>Mes Tickets</ion-title>
+   <ion-buttons end="" >
+     <button *ngIf="!user" ion-button icon-end style="text-transform: none" (click)="pending()">
+       <span >J'ai une carte
+        <ion-icon name="md-log-in"></ion-icon>
+       </span>
+     </button>
+     <button *ngIf="user" ion-button icon-end style="text-transform: none" (click)="useroptions($event)">
+      <span >{{ user.nom }}
+        <ion-icon name="md-more"></ion-icon>
+       </span>
+     </button>
+   </ion-buttons>
+  </ion-navbar>
+ <!-- <headercomponent [header]="header_data" (montogglesearch)="pending()" (useroptions)="useroptons($event)" ></headercomponent>-->
+
+
+</ion-header>
+
+
+<ion-content padding="">
+  <ion-scroll  style="width:100%;height:100%;margin-left: -30px;" scrollY="true" scrollX="true">
+    <ion-list class="accordion-list" style="background-color: #E0F7FA;">
+
+      <ion-item *ngFor="let item of tickets; let i = index" (click)="detailsTicket(item,item.operation)" detail-push >
+        <ion-avatar item-start>
+          <img *ngIf="item.operation=='hbd'" src="assets/imgs/{{ item.type }}.jpg" onerror="this.src='assets/imgs/KOLLERE.jpg';">
+          <img *ngIf="item.operation=='restaurant'" src="assets/imgs/login.jpg">
+        </ion-avatar>
+
+
+        <h2 style="color: #999900" *ngIf="item.operation=='restaurant'" >{{item.codepanier}}</h2>
+        <span *ngIf="item.operation=='hbd'">
+          <h2 style="color: #999900"  >{{item.ticket}}</h2>
+          <p>Comm : <span>{{ item.type }}</span></p>
+        <p>Chez : {{ item.resto }}</p>
+        </span>
+
+
+      </ion-item>
+    </ion-list>
+  </ion-scroll>
+</ion-content>

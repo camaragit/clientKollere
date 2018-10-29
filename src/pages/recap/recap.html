@@ -1,0 +1,89 @@
+<!--
+  Generated template for the RecapPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="kollere">
+    <ion-title>Récapitulatif de la commande</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <ion-item>
+      <ion-label item-start>Nom gâteau</ion-label>
+      <ion-label item-right>{{ recapdata.typegateau }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>PATISSERIE</ion-label>
+      <ion-label item-right>{{ recapdata.resto }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Prénom</ion-label>
+      <ion-label item-right>{{ recapdata.clients.prenom }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Nom</ion-label>
+      <ion-label item-end>{{ recapdata.clients.nom }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Téléphone</ion-label>
+      <ion-label item-end>{{ recapdata.clients.phone }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Nombre de parts</ion-label>
+      <ion-label item-end>{{ recapdata.nbpart }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Nombre de bougies</ion-label>
+      <ion-label item-end>{{ recapdata.clients.nbbougie }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Adresse  Livraison </ion-label>
+      <ion-label item-end>{{ recapdata.clients.adresse }}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label item-start>Date de  Livraison </ion-label>
+      <ion-label item-end>{{ recapdata.showdate }}</ion-label>
+    </ion-item>
+
+    <fieldset>
+      <legend>   </legend>
+      <ion-item>
+        <ion-label item-start>Chez {{ recapdata.resto }} Prix/Livraison </ion-label>
+        <ion-label item-end>{{ recapdata.boutique }}/{{ recapdata.prixlivraisonb }} (CFA)</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label item-start>Total </ion-label>
+        <ion-label item-end>{{ recapdata.totalboutique }}F CFA</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label item-start>Avec Kollere Prix/Livraison</ion-label>
+        <ion-label item-end>{{ recapdata.kollere }}/{{ recapdata.prixlivraisonk }} (F CFA)</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label item-start>Total </ion-label>
+        <ion-label item-end>{{ recapdata.totalkollere }}F CFA</ion-label>
+      </ion-item>
+
+    </fieldset>
+
+    <ion-item no-lines >
+      <button item-end round ion-button icon-start  color="danger" >
+        <ion-icon name="close" (click)="validerCommande('quitter')"></ion-icon>
+        Annuler
+      </button>
+      <button item-end round ion-button (click)="validerCommande('save')" color="kollere" >
+        <ion-icon name="cart"></ion-icon>
+        Confirmer
+      </button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

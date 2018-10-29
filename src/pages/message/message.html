@@ -1,0 +1,22 @@
+
+
+
+<ion-content padding class="main-view">
+  <div class="modal_content">
+  <ion-list style="margin-top: 20px">
+    <ion-item style="background-color: #999900;border-radius: 10px">
+      <ion-avatar item-start="">
+        <img src="assets/imgs/KOLLERE.jpg">
+      </ion-avatar>
+      <h2 style="color:white; font-family: Georgia;margin-top: 4px;">KOLLERÉ</h2>
+    </ion-item>
+  </ion-list>
+    <fieldset>
+      <h3 style="text-align: center;color: #999900;font-weight: bold;font-family: Georgia;font-weight: bold">{{ message.title }}</h3>
+      <p style="font-family: Georgia;">{{ message.body }}</p>
+    </fieldset>
+    <ion-buttons end style="margin-top: 25px">
+      <button icon-start="" ion-button="" color="kollere" (click)="quitter()"><ion-icon name="md-checkmark-circle-outline"></ion-icon> OK</button>
+    </ion-buttons>
+  </div>
+</ion-content>

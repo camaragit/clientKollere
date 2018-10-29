@@ -1,0 +1,26 @@
+<ion-navbar color="kollere">
+  <button  ion-button icon-only menuToggle>
+    <ion-icon name="menu"></ion-icon>
+  </button>
+
+  <ion-title *ngIf="!header_data.isOn" >
+    {{header_data.title}}
+  </ion-title>
+  <ion-searchbar placeholder="Chercher un type" (ionInput)="filtergateau($event)" *ngIf="header_data.isOn"></ion-searchbar>
+
+ <!-- <ion-buttons end="" >
+    <button *ngIf="header_data.search" (click)="doIt()" style="background-color: transparent;font-size: 20px;color: white">
+      <ion-icon  name="search"></ion-icon>
+    </button>
+    <button *ngIf="!header_data.search && !header_data.user" ion-button icon-end style="text-transform: none" (click)="doIt()">
+       <span >J'ai une carte
+        <ion-icon name="md-log-in"></ion-icon>
+       </span>
+    </button>
+    <button *ngIf="!header_data.search && header_data.user" ion-button icon-end style="text-transform: none" (click)="useroption()">
+      <span >{{ header_data.user.nom }}
+        <ion-icon name="md-more"></ion-icon>
+       </span>
+    </button>
+  </ion-buttons>-->
+</ion-navbar>

@@ -1,14 +1,59 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-header>
+  <ion-navbar color="kollere">
+    <ion-title class="titlepadding">
+      Kolleré
+    </ion-title>
+    <ion-buttons end="" >
+      <button *ngIf="!user" ion-button icon-end style="text-transform: none" (click)="pending()">
+       <span >J'ai une carte
+        <ion-icon name="md-log-in"></ion-icon>
+       </span>
+      </button>
+      <button *ngIf="user" ion-button icon-end style="text-transform: none" (click)="useroptions($event)">
+      <span >{{ user.nom }}
+        <ion-icon name="md-more"></ion-icon>
+       </span>
+      </button>
+    </ion-buttons>
+    <button ion-button="" menuToggle="">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+<!--<ion-header><headercomponent [header]="header_data" (montogglesearch)="pending()" (useroptions)="useroptions($event)" ></headercomponent></ion-header>-->
+<ion-content padding style="background-color: #E0F7FA">
+
+  <fieldset>
+
+    <div class="p-container padding-bottom">
+      <div class="p-box" style="margin-top: 20px;">
+        <a ui-sref="app.voiture" *ngFor="let p of pages" (click)="verspage(p)">
+          <div class="p-box-img">
+            <i><ion-icon [name]="p.icon" *ngIf="p.title!='Anniversaire' && p.title!='Produits locaux'" color="light"></ion-icon></i>
+            <i class="fa fa-birthday-cake" *ngIf="p.title=='Anniversaire'" style="color:white"></i>
+            <i class="fa fa-shopping-basket" *ngIf="p.title=='Produits locaux'" style="color:white"></i>
+          </div>
+          <span class="p-box-title" style="color: white">{{ p.title }}</span>
+        </a>
+
+
+      </div>
+      <!-- <div proxi-scroll></div>
+    --> </div>
+  </fieldset>
+  <div class="branding padding" *ngIf="messages.message" >
+
+    <div style="background-color: #999900;color:white;border-radius: 10px;box-shadow: 1px 1px 1px 1px;  padding-bottom: 10px; padding-top: 20px; padding-left: 5px;margin-top: 20px;">
+        <div class="tagline" style="font-family: Georgia;text-align:justify; text-justify:newspaper; padding: 5px; margin: 10px;"><h2>{{ messages.code }}</h2></div>
+         <p style="text-align:justify; text-justify:newspaper; padding: 5px; margin: 10px;font-family: Georgia;margin-top: -20px;">
+           {{ messages.message }}
+         </p>
+       </div>
+  </div>
+
 </ion-content>
+
+
+

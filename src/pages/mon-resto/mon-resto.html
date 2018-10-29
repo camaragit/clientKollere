@@ -1,0 +1,52 @@
+<ion-header>
+
+  <ion-navbar color="kollere">
+    <button ion-button="" menuToggle="">
+      <ion-icon name="menu"></ion-icon>
+
+    </button>
+    <ion-title>Mon Resto</ion-title>
+    <ion-buttons end="" >
+      <button *ngIf="!user" ion-button icon-end style="text-transform: none" (click)="pending()">
+       <span >J'ai une carte
+        <ion-icon name="md-log-in"></ion-icon>
+       </span>
+      </button>
+      <button *ngIf="user" ion-button icon-end style="text-transform: none" (click)="useroptions($event)">
+      <span >{{ user.nom }}
+        <ion-icon name="md-more"></ion-icon>
+       </span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding >
+  <ion-list>
+    <form class="list form" >
+      <fieldset *ngIf="restaurants && restaurants.length>0">
+        <ion-item >
+          <ion-label floating="" style="color: #999900;font-weight: bold">Choisir votre Restaurant</ion-label>
+          <ion-select  [(ngModel)]="restaurant" icon-left (ionChange)="changementrestaurant()"  name="restaurant" interface="popover">
+            <ion-option value="{{ resto.entrepriseAgent }}" *ngFor="let resto of restaurants;">{{ resto.entrepriseAgent }}</ion-option>
+          </ion-select>
+        </ion-item>
+        <span *ngIf="familles && familles.length>0">
+          <ion-item>
+            <ion-label style="color: #999900;font-weight: bold">Propose les familles suivantes : </ion-label>
+          </ion-item>
+          <ion-item *ngFor="let famille of familles; let i = index" detail-push (click)="verscommande(famille)">
+          <ion-avatar item-start>
+            <img src="assets/imgs/{{ famille }}.jpg" onerror="this.src='assets/imgs/KOLLERE.jpg';">
+          </ion-avatar>
+          <h2 style="color: #999900">{{famille}}</h2>
+
+        </ion-item>
+        </span>
+
+      </fieldset>
+    </form>
+  </ion-list>
+</ion-content>

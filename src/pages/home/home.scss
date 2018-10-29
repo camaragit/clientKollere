@@ -1,3 +1,12 @@
 page-home {
+  p-container:after{content:"";display:table;clear:both}h3{font-size:14px}
+  .p-box{margin:15px -5px 15px 5px;text-align:center}.p-box i{margin-top:15%;font-size:40px;color:rgba(0,0,0,.7)}.p-box a{width:43%;background-color:#999900;display:inline-block;box-shadow:1px 1px 1px 1px #999900;margin:0 15px 14px 0;border-radius:12px;padding:2px 0}.p-box .p-box-img{height:70px;width:110px;margin:0 auto;display:block;color: white}.p-box .p-box-title{color:white;font-family:Georgia;text-align:center;display:block;padding-bottom:10px;width:100%;font-size:14px}
+  fieldset{border-radius:11px;margin-top:15px;border-color:#999900}
+
+  .ios{
+    .titlepadding{
+      padding-right: 25px;
+    }
+  }
 
 }

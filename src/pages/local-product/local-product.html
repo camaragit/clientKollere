@@ -1,0 +1,138 @@
+<ion-header>
+
+  <ion-navbar color="kollere">
+    <ion-title>Complément Commande</ion-title>
+    <button ion-button="" menuToggle="">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end="" >
+      <button *ngIf="!user" ion-button icon-end style="text-transform: none" (click)="pending()">
+       <span >J'ai une carte
+        <ion-icon name="md-log-in"></ion-icon>
+       </span>
+      </button>
+      <button *ngIf="user" ion-button icon-end style="text-transform: none" (click)="useroptions($event)">
+      <span >{{ user.nom }}
+        <ion-icon name="md-more"></ion-icon>
+       </span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <!--  <headercomponent [header]="header_data" (montogglesearch)="pending()" (useroptions)="useroptons($event)" ></headercomponent>-->
+</ion-header>
+
+
+<ion-content padding="" isScrolling="true">
+
+  <ion-list>
+
+
+    <form class="list form" [formGroup]="client" >
+      <fieldset>
+
+        <legend>Compléter votre commande</legend>
+        <span *ngIf="globalData">
+                  <ion-item >
+          <ion-card>
+            <img src="assets/imgs/{{ globalData }}.jpg" onerror="this.src='assets/imgs/KOLLERE.jpg';"/>
+            <div class="card-title">{{ globalData }}</div>
+            <div class="card-subtitle"></div>
+          </ion-card>
+        </ion-item>
+        <ion-item>
+          <ion-label floating="">Où voulez-vous l'acheter ?</ion-label>
+          <ion-select formControlName="resto" icon-left (ionChange)="changementrestaurant()" interface="popover">
+            <ion-option value="{{ r.commerce }}" *ngFor="let r of resto;">{{ r.commerce }}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="client.controls.resto.valid">
+          <ion-label color="kollere" floating>Quantité</ion-label>
+          <ion-input formControlName="quantite" type="number" (ionChange) ="changementquantite()"></ion-input>
+        </ion-item>
+        <span *ngIf="client.controls.quantite.valid">
+          <ion-item>
+          <ion-label color="kollere" floating>Prix {{ client.controls['resto'].value }}</ion-label>
+            <ion-input icon-left="" type="text" formControlName="prixboutique" readonly></ion-input>
+          </ion-item>
+         <ion-item>
+          <ion-label color="kollere" floating>Prix Kolleré</ion-label>
+           <ion-input icon-left="" type="text" formControlName="prixkollere" readonly></ion-input>
+        </ion-item>
+          <ion-item>
+          <ion-label color="kollere" >Reduction</ion-label>
+          <ion-label color="kollere" >{{client.controls['reduction'].value}} %</ion-label>
+
+        </ion-item>
+        <ion-item>
+          <ion-label floating color="kollere" floating>Adresse de livraison *</ion-label>
+          <ion-select icon-left="" formControlName="adresse" (ionChange)="getTarif()" interface="popover">
+            <ion-option value="{{ adresse.adresse }}"
+                        *ngFor="let adresse of adresses?.livraison">{{ adresse.adresse }}</ion-option>
+          </ion-select>
+          </ion-item>
+        <ion-item *ngIf="client.controls.adresse.valid">
+          <ion-label color="kollere">Prix Livraison :</ion-label><ion-label
+          color="kollere">{{ tariflivraison }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="client.controls.adresse.valid">
+          <ion-label color="kollere" floating>Date de Livraison *</ion-label>
+          <ion-datetime displayFormat="DDDD DD MMMM YYYY" doneText="Choisir" cancelText="Annuler" [min]="minDate"
+                        formControlName="datelivraison"></ion-datetime>
+        </ion-item>
+
+        <ion-item
+          *ngIf="((client.controls.datelivraison.hasError('required'))) && client.controls.datelivraison.touched">
+          <p class="erreur">Selectionner la date de livraison </p>
+        </ion-item>
+      </span>
+        <span *ngIf="client.controls.datelivraison.valid">
+          <span *ngIf="!user">
+                    <ion-item>
+          <ion-label color="kollere" floating>Prénom *</ion-label>
+          <ion-input icon-left="" type="text" formControlName="prenom"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="client.controls.prenom.hasError('required') && client.controls.prenom.touched">
+          <p class="erreur">Saisir votre Prénom </p>
+        </ion-item>
+          <ion-item>
+            <ion-label color="kollere" floating>Nom *</ion-label>
+            <ion-input formControlName="nom"></ion-input>
+          </ion-item>
+       <ion-item *ngIf="client.controls.nom.hasError('required') && client.controls.nom.touched">
+          <p class="erreur">Saisir votre Prénom </p>
+        </ion-item>
+            <ion-item>
+          <ion-label color="kollere" floating>Téléphone *</ion-label>
+          <ion-input type="tel" formControlName="phone" icon-left="" maxlength="9" (ionBlur)="veriftel()" (ionFocus)="resetphone()"></ion-input>
+        </ion-item>
+        <ion-item
+          *ngIf="((client.controls.phone.hasError('required')) || phoneinvalid==true) && client.controls.phone.touched">
+          <p class="erreur">Saisir votre un numéro valide </p>
+        </ion-item>
+          </span>
+
+
+      </span>
+
+
+        <ion-item no-lines>
+          <button item-end round ion-button icon-start color="danger" (click)="goback()">
+            <ion-icon name="close"></ion-icon>
+            Annuler
+          </button>
+          <button item-end round ion-button (click)="sendCommanderesto()" icon-start
+                  [disabled]="!client.valid || phoneinvalid==true" color="kollere">
+            <ion-icon name="cart"></ion-icon>
+            Commander
+          </button>
+        </ion-item>
+        </span>
+
+
+      </fieldset>
+
+
+    </form>
+  </ion-list>
+</ion-content>

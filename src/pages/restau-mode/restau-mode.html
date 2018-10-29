@@ -1,0 +1,54 @@
+
+<ion-header>
+  <ion-navbar color="kollere">
+    <ion-title class="titlepadding">
+      Kolleré
+    </ion-title>
+    <ion-buttons end="" >
+      <button *ngIf="!user" ion-button icon-end style="text-transform: none" (click)="pending()">
+       <span >J'ai une carte
+        <ion-icon name="md-log-in"></ion-icon>
+       </span>
+      </button>
+      <button *ngIf="user" ion-button icon-end style="text-transform: none" (click)="useroptions($event)">
+      <span >{{ user.nom }}
+        <ion-icon name="md-more"></ion-icon>
+       </span>
+      </button>
+    </ion-buttons>
+    <button ion-button="" menuToggle="">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+<ion-content padding style="background-color: #E0F7FA">
+
+  <fieldset>
+<legend>Trier par Menu ou Restaurant</legend>
+    <div class="p-container padding-bottom">
+      <div class="p-box" style="margin-top: 20px;">
+        <a (click)="verspage('tsrestos')">
+          <div class="p-box-img">
+            <i><ion-icon name="ios-restaurant-outline"  color="light"></ion-icon></i>
+          </div>
+          <span class="p-box-title" style="color: white">Menu</span>
+        </a>
+        <a   (click)="verspage('monresto')">
+          <div class="p-box-img">
+            <i><ion-icon name="md-restaurant"  color="light"></ion-icon></i>
+          </div>
+          <span class="p-box-title" style="color: white">Restaurant</span>
+        </a>
+
+
+      </div>
+      <!-- <div proxi-scroll></div>
+    --> </div>
+  </fieldset>
+
+
+</ion-content>
+
+
+

@@ -1,0 +1,115 @@
+<ion-header>
+
+  <ion-navbar color="kollere">
+    <ion-title *ngIf="detailsTicket">Details du ticket <span><b>{{ detailsTicket.ticket }}</b></span>
+    </ion-title>
+    <ion-title *ngIf="paniers">Details du ticket <span><b>{{ paniers.codepanier }}</b></span>
+    </ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding="">
+  <ion-list *ngIf="detailsTicket">
+
+      <ion-item>
+      <ion-label>Commande :  </ion-label>
+      <ion-label><span style="color: #999900"><b>{{ detailsTicket.nombre_parts }} parts</b></span></ion-label>
+      </ion-item>
+    <ion-item>
+      <ion-label><span style="color: #999900"><b> De {{ detailsTicket.item }} </b></span> </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Prix {{ detailsTicket.resto }}  </ion-label><ion-label><span
+      style="color: #999900"><b>{{ detailsTicket.prixResto }} F CFA</b></span>  </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Avec Kolleré </ion-label><ion-label><span style="color: #999900"><b>{{ detailsTicket.montantKollere }} F CFA</b></span></ion-label>
+    </ion-item>
+      <ion-item>
+      <ion-label style="color: #999900;font-weight: bold">Reduction </ion-label><ion-label><span
+        style="color: #999900;font-weight: bold"><b>{{detailsTicket.reduction}} %</b></span></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Lieu de Livraison </ion-label><ion-label><span
+      style="color: #999900"><b>{{ detailsTicket.adresse_livraison }}</b></span> </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Prix de Livraison </ion-label><ion-label><span
+      style="color: #999900"><b>{{ detailsTicket.prix_livraison }} F CFA </b></span></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Total </ion-label><ion-label><span
+      style="color: #999900"><b>{{ detailsTicket.total }} F CFA </b></span></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date Livraison </ion-label><ion-label><span
+      style="color: #999900"><b>{{ detailsTicket.date_livraison }} </b></span></ion-label>
+    </ion-item>
+
+  </ion-list>
+<span *ngIf="paniers">
+  <fieldset>
+    <ion-item-group *ngFor="let com of paniers?.commerces;let i = index">
+      <ion-item-divider class="diviseur">{{ com.commerce }}</ion-item-divider>
+      <span *ngFor="let panier of com.paniers; let j = index">
+        <ion-item>
+          <ion-label style="color: #999900;text-align: center">{{ panier.item }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="!panier.editing || panier.editing==null">
+          <ion-label>Quantite</ion-label><ion-label>{{ panier.quantite }}</ion-label>
+        </ion-item>
+        <ion-item *ngIf="panier.editing==true">
+          <ion-label floating="">Quantite</ion-label><ion-input type="number" [(ngModel)]="panier.newquantite" (ionChange)="calculate(i,j)" name="newquantite"></ion-input>
+        </ion-item>
+        <ion-item *ngIf="panier.erreur && panier.erreur==true">
+          <p class="erreur">Saisir une Quantité </p>
+        </ion-item>
+        <ion-item>
+          <ion-label>Prix {{ com.commerce }}</ion-label><ion-label>{{ panier.prixrestaurant }} F CFA</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>Prix kolleré </ion-label><ion-label>{{ panier.prixsurkollere }} F CFA</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label style="color: #999900;font-weight: bold">Reduction</ion-label><ion-label>{{ 100 - (panier.prixsurkollere*1 * 100 / panier.prixrestaurant) }} %</ion-label>
+        </ion-item>
+        <ion-item no-lines>
+          <span *ngIf="panier.editing==true">
+            <button item-end round ion-button icon-start color="danger" (click)="cancel(i,j)">
+              <ion-icon name="close"></ion-icon>Annuler
+            </button>
+            <button item-end round ion-button [disabled]="!panier.newquantite || panier.newquantite <=0" (click)="validateupdate(i,j,'update')" icon-start color="kollere">
+              <ion-icon name="ios-checkmark-circle-outline" ></ion-icon>
+            Valider
+            </button>
+          </span>
+          <span *ngIf="!panier.editing || panier.editing==null">
+            <button item-end round ion-button  icon-start color="danger" (click)="validateupdate(i,j,'suppression')">
+              <ion-icon name="ios-trash-outline"></ion-icon>
+            Supprimer commande
+            </button>
+            <button item-end round ion-button  icon-start color="kollere" (click)="update(i,j)">
+              <ion-icon name="ios-create-outline"></ion-icon>
+            Editer quantité
+            </button>
+          </span>
+
+        </ion-item>
+
+      </span>
+    </ion-item-group>
+  </fieldset>
+  <ion-list>
+    <fieldset>
+      <legend>Totaux</legend>
+      <ion-item><ion-label>Prix Restaurant </ion-label><ion-label style="color: #999900">{{ paniers.montantPanierResto }}F CFA</ion-label></ion-item>
+      <ion-item><ion-label>Prix Kolleré </ion-label><ion-label style="color: #999900">{{ paniers.montantPanierKollere }}F CFA</ion-label></ion-item>
+
+    </fieldset>
+  </ion-list>
+<br><br><br>
+  </span>
+</ion-content>

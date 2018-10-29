@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-navbar color="kollere">
+    <ion-title>Recap Ticket</ion-title>
+    <button ion-button="" menuToggle="">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-buttons end="" >
+      <button *ngIf="!user" ion-button icon-end style="text-transform: none" (click)="pending()">
+       <span >J'ai une carte
+        <ion-icon name="md-log-in"></ion-icon>
+       </span>
+      </button>
+      <button *ngIf="user" ion-button icon-end style="text-transform: none" (click)="useroptions($event)">
+      <span >{{ user.nom }}
+        <ion-icon name="md-more"></ion-icon>
+       </span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+  <!--  <headercomponent [header]="header_data" (montogglesearch)="pending()" (useroptions)="useroptons($event)" ></headercomponent>-->
+</ion-header>
+<ion-content padding>
+  <fieldset>
+    <legend>
+    Détails de votre ticket <span style="color: #999900;font-weight: bold">{{ paniers.codepanier }}</span>
+  </legend>
+  <ion-item-group *ngFor="let com of paniers?.commerces" >
+
+
+
+      <ion-item-divider class="diviseur" >{{ com.commerce }}</ion-item-divider>
+      <span *ngFor="let panier of com.paniers">
+      <ion-item  >
+      <ion-label style="color: #999900;text-align: center" >{{panier.item}}</ion-label>
+    </ion-item>
+      <ion-item>
+        <ion-label>Quantite</ion-label><ion-label>{{ panier.quantite }}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Prix {{ com.commerce  }}</ion-label><ion-label>{{ panier.prixrestaurant }} F CFA</ion-label>
+      </ion-item>
+        <ion-item>
+        <ion-label>Prix kolleré </ion-label><ion-label>{{ panier.prixsurkollere }} F CFA</ion-label>
+      </ion-item>
+            <ion-item>
+        <ion-label style="font-weight: bold;color: #999900">Reduction</ion-label><ion-label style="font-weight: bold;color: #999900">{{ 100 - (panier.prixsurkollere*1 * 100 / panier.prixrestaurant)  }} %</ion-label>
+      </ion-item>
+    </span>
+
+  </ion-item-group>
+  </fieldset>
+  <ion-list>
+    <fieldset>
+      <legend>Totaux</legend>
+      <ion-item><ion-label>Prix  Restaurant </ion-label><ion-label style="color: #999900">{{ paniers.montantPanierResto }}F CFA</ion-label></ion-item>
+      <ion-item><ion-label>Prix  Kolleré </ion-label><ion-label style="color: #999900">{{ paniers.montantPanierKollere }}F CFA</ion-label></ion-item>
+
+    </fieldset>
+  </ion-list>
+  <ion-buttons end>
+    <button icon-start="" ion-button="" color="kollere" (click)="vershome()"><ion-icon name="md-checkmark-circle-outline"></ion-icon> OK</button>
+  </ion-buttons>
+</ion-content>

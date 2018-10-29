@@ -1,0 +1,111 @@
+<!--
+  Generated template for the RestaurantPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<!--<ion-header>
+
+  <ion-navbar color="kollere">
+    <button ion-button="" menuToggle="">
+      <ion-icon name="menu"></ion-icon>
+
+    </button>
+    <ion-title>Restaurant</ion-title>
+    <ion-buttons end="" >
+      <button *ngIf="!user" ion-button icon-end style="text-transform: none" (click)="pending()">
+       <span >J'ai une carte
+        <ion-icon name="md-log-in"></ion-icon>
+       </span>
+      </button>
+      <button *ngIf="user" ion-button icon-end style="text-transform: none" (click)="useroptions($event)">
+      <span >{{ user.nom }}
+        <ion-icon name="md-more"></ion-icon>
+       </span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding >
+  <ion-list>
+
+
+    <form class="list form" [formGroup]="client" >
+      <fieldset>
+        <ion-item>
+          <ion-label floating="">Choisir une famille de produit</ion-label>
+          <ion-select formControlName="famille" icon-left (ionChange)="changementfamille()" interface="popover">
+            <ion-option value="{{ famille }}" *ngFor="let famille of familles;">{{ famille }}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="client.controls.famille.valid">
+          <ion-label floating="">Choisir un produit</ion-label>
+          <ion-select formControlName="item" icon-left (ionChange)="changementproduit()" interface="popover">
+            <ion-option value="{{ item }}" *ngFor="let item of items;">{{ item }}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item *ngIf="client.controls.item.valid">
+          <ion-label floating="">Où voulez-vous l'acheter ?</ion-label>
+          <ion-select formControlName="resto" icon-left (ionChange)="changementresto()" interface="popover">
+            <ion-option value="{{ r.commerce }}" *ngFor="let r of restos;">{{ r.commerce }}</ion-option>
+          </ion-select>
+        </ion-item>
+        <span *ngIf="client.controls.resto.valid">
+          <ion-item>
+          <ion-label color="kollere" floating>Prix {{ client.controls['resto'].value }}</ion-label>
+            <ion-input icon-left="" type="text" formControlName="prixboutique" readonly></ion-input>
+          </ion-item>
+         <ion-item>
+          <ion-label color="kollere" floating>Prix Kollere</ion-label>
+           <ion-input icon-left="" type="text" formControlName="prixkollere" readonly></ion-input>
+        </ion-item>
+        </span>
+        <ion-item no-lines>
+          <button item-end round ion-button icon-start color="danger" (click)="goback()">
+            <ion-icon name="close"></ion-icon>
+            Annuler
+          </button>
+          <button item-end round ion-button (click)="sendCommande()" icon-start
+                  [disabled]="!client.valid " color="kollere">
+            <ion-icon name="cart"></ion-icon>
+            Commander
+          </button>
+        </ion-item>
+      </fieldset>
+    </form>
+  </ion-list>
+</ion-content>-->
+<ion-header>
+  <!-- <headercomponent [header]="header_data" (montogglesearch)="toggleRecherche()"></headercomponent>-->
+  <ion-navbar color="kollere">
+    <ion-title *ngIf="!isOn">Restaurant</ion-title>
+    <button ion-button="" menuToggle="">
+      <ion-icon name="menu"></ion-icon>
+
+    </button>
+    <ion-searchbar placeholder="Chercher une famille" (ionInput)="filterfamille($event)" *ngIf="isOn"></ion-searchbar>
+    <ion-buttons end >
+      <button (click)="toggleRecherche()" style="background-color: transparent;font-size: 20px;color: white"><ion-icon  name="search"></ion-icon></button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content style="background-color: #E0F7FA">
+
+  <ion-list class="accordion-list" style="background-color: #E0F7FA">
+
+    <ion-item *ngFor="let item of familles; let i = index" detail-push (click)="verscommande(item)">
+      <ion-avatar item-start>
+        <img src="assets/imgs/{{ item }}.jpg" onerror="this.src='assets/imgs/KOLLERE.jpg';">
+
+      </ion-avatar>
+      <h2 style="color: #999900">{{item}}</h2>
+
+    </ion-item>
+  </ion-list>
+</ion-content>

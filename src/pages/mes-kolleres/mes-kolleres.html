@@ -1,0 +1,86 @@
+<!--
+  Generated template for the MesKolleresPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="kollere">
+    <button ion-button="" menuToggle="">
+      <ion-icon name="menu"></ion-icon>
+
+    </button>
+    <ion-title>Mes Kolleres</ion-title>
+    <ion-buttons end="" >
+      <button *ngIf="!user" ion-button icon-end style="text-transform: none" (click)="pending()">
+       <span >J'ai une carte
+        <ion-icon name="md-log-in"></ion-icon>
+       </span>
+      </button>
+      <button *ngIf="user" ion-button icon-end style="text-transform: none" (click)="useroptions($event)">
+      <span >{{ user.nom }}
+        <ion-icon name="md-more"></ion-icon>
+       </span>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+ <!-- <ion-list >
+
+
+    <form class="list form"  >
+      <fieldset>
+
+        <legend>Choisir une Période</legend>
+
+        <ion-item>
+          <ion-label color="kollere" floating>Date debut *</ion-label>
+          <ion-datetime displayFormat="DD-MM-YYYY" (ionChange)="resetmindate()" name="datedebut" (ionFocus)="resetdatefin()" doneText="Choisir" cancelText="Annuler"
+                        [(ngModel)]="datedebut"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label color="kollere" floating>Date Fin *</ion-label>
+          <ion-datetime displayFormat="DD-MM-YYYY" doneText="Choisir"  name="datefin"  cancelText="Annuler" [min]="minDate"
+                        [(ngModel)]="datefin" [disabled]="!datedebut"></ion-datetime>
+        </ion-item>
+
+        <ion-item no-lines>
+
+          <button item-end round ion-button (click)="afficher()" icon-start
+                  [disabled]="!datedebut || !datefin" color="kollere">
+            <ion-icon name="search"></ion-icon>
+            Afficher
+          </button>
+        </ion-item>
+      </fieldset>
+
+
+    </form>
+  </ion-list> -->
+
+    <ion-list style="margin-bottom: 50px;">
+      <ion-item  *ngFor="let kollere of kolleres; let i = index"  (click)="verscadeaux(kollere)" detail-push="" >
+        <ion-avatar item-start>
+          <img  src="assets/imgs/{{kollere.commerce}}.jpg" onerror="this.src='assets/imgs/KOLLERE.jpg';"/>
+        </ion-avatar>
+        <h2 style="color: #999900">{{ kollere.commerce }}</h2>
+        <p><b>Total Achats&emsp; : </b><span style="color: #999900">{{ kollere.total }}F CFA</span></p>
+        <p><b>Nombre de points :</b><span style="color: #999900">{{ kollere.point }}</span></p>
+
+     </ion-item>
+    </ion-list>
+  <ion-list *ngIf="kolleres!=null">
+    <fieldset>
+      <legend>Totaux</legend>
+      <ion-item><ion-label>Total Achats </ion-label><ion-label style="color: #999900">{{ totalachat }}F CFA</ion-label></ion-item>
+      <ion-item><ion-label>Total Points </ion-label><ion-label style="color: #999900">{{ totalpoint }}</ion-label></ion-item>
+
+    </fieldset>
+  </ion-list>
+<br><br>
+</ion-content>

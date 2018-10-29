@@ -1,0 +1,51 @@
+
+
+<ion-header>
+  <!-- <headercomponent [header]="header_data" (montogglesearch)="toggleRecherche()"></headercomponent>-->
+  <ion-navbar color="kollere">
+    <ion-title *ngIf="!isOn">{{ famille }} <span *ngIf="restaurant">({{ restaurant }})</span></ion-title>
+    <button ion-button="" menuToggle="">
+      <ion-icon name="menu"></ion-icon>
+
+    </button>
+    <ion-searchbar placeholder="Chercher un type" (ionInput)="filterproduit($event)" *ngIf="isOn"></ion-searchbar>
+    <ion-buttons end >
+      <button (click)="toggleRecherche()" style="background-color: transparent;font-size: 20px;color: white"><ion-icon  name="search"></ion-icon></button>
+    </ion-buttons>
+
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <ion-list class="accordion-list" >
+    <!--   <ion-item *ngFor="let item of arr; let i = index" detail-push (click)="verscommande(item)">
+
+<span >{{item}}</span>
+
+    </ion-item>
+-->
+
+<span *ngIf="!schoolitems">
+     <ion-item *ngFor="let item of items; let i = index" detail-push (click)="verscommande(item)">
+      <ion-avatar item-start>
+        <img src="assets/imgs/{{ famille }}.jpg" onerror="this.src='assets/imgs/KOLLERE.jpg';">
+      </ion-avatar>
+      <h2 style="color: #999900">{{item}}</h2>
+
+    </ion-item>
+</span>
+    <span *ngIf="schoolitems">
+           <ion-item *ngFor="let item of items; let i = index" detail-push (click)="verscommande(item)">
+      <ion-avatar item-start>
+        <img src="assets/imgs/{{ items.famille }}.jpg" onerror="this.src='assets/imgs/KOLLERE.jpg';">
+      </ion-avatar>
+      <h2 style="color: #999900">{{item.item}}</h2>
+
+    </ion-item>
+
+    </span>
+
+  </ion-list>
+</ion-content>

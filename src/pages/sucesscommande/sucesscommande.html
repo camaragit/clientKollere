@@ -1,0 +1,33 @@
+<!--
+  Generated template for the SucesscommandePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar color="kollere">
+    <ion-title>Kollere</ion-title>
+    <button ion-button="" menuToggle="">
+      <ion-icon name="menu"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding style="background-color: #E0F7FA">
+<fieldset style="top: 20%">
+  <legend>Infos Sur la Commande</legend>
+  <div style="font-size: 18px">
+    <p> Votre Commande est enregistrée avec succès .</p><br>
+    <p> Le code de votre ticket est <b>{{ successdata.ticket }}</b> </p> <br>
+    <p>Merci de votre fidélité à Kollere.</p><br>
+    <ion-buttons end>
+      <button icon-start="" ion-button="" color="kollere" (click)="vershome()"><ion-icon name="md-checkmark-circle-outline"></ion-icon> OK</button>
+    </ion-buttons>
+  </div>
+
+
+</fieldset>
+</ion-content>
