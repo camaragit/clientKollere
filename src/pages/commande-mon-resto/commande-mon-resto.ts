@@ -31,6 +31,8 @@ export class CommandeMonRestoPage {
   adresses:any
   localdata :any=[];
   aveclivraison:boolean=false;
+  prixboutiqueUnit:any;
+  prixkollereUnit:any;
   constructor(private gbv:GloabalVariable,private alertCtrl:AlertController,private modalCrtl:ModalController,private popoverCtrl:PopoverController,private storage:Storage, private gCtrl:GateauxServiceProvider,public navCtrl: NavController, public navParams: NavParams,private formBuilder:FormBuilder) {
     this.client = this.formBuilder.group({
       resto: ['', Validators.required],
@@ -41,10 +43,12 @@ export class CommandeMonRestoPage {
    });
     this.loaduser();
     this.tarif = this.navParams.get('tarif')
+    this.prixboutiqueUnit = this.tarif[0].valeurItem.prixResto;
+    this.prixkollereUnit = this.tarif[0].valeurItem.prixKollere;
     this.client.controls['resto'].setValue(this.navParams.get('resto'));
     this.client.controls['quantite'].setValue(1)
-    this.client.controls['prixboutique'].setValue(this.tarif[0].valeurItem.prixResto);
-    this.client.controls['prixkollere'].setValue(this.tarif[0].valeurItem.prixKollere);
+    this.client.controls['prixboutique'].setValue(this.prixkollereUnit);
+    this.client.controls['prixkollere'].setValue(this.prixkollereUnit);
     let pourcentage = ((this.client.controls['prixkollere'].value*1) * 100 / (this.client.controls['prixboutique'].value*1))*1;
     // console.log("POURCENTAGE VAUT =====>"+pourcentage)
     this.client.controls['reduction'].setValue(Math.ceil(100 - pourcentage*1) );
@@ -82,8 +86,9 @@ export class CommandeMonRestoPage {
     else this.avecLivraison();
   }
   changementquantite(){
-    this.client.controls["prixboutique"].setValue( this.client.controls["prixboutique"].value*this.client.controls['quantite'].value);
-    this.client.controls["prixkollere"].setValue(this.client.controls["prixkollere"].value*this.client.controls['quantite'].value);
+
+    this.client.controls["prixboutique"].setValue( this.prixboutiqueUnit*this.client.controls['quantite'].value);
+    this.client.controls["prixkollere"].setValue(this.prixkollereUnit*this.client.controls['quantite'].value);
     let pourcentage = ((this.client.controls['prixkollere'].value*1) * 100 / (this.client.controls['prixboutique'].value*1))*1;
     // console.log("POURCENTAGE VAUT =====>"+pourcentage)
     this.client.controls['reduction'].setValue(Math.ceil(100 - pourcentage*1) );
