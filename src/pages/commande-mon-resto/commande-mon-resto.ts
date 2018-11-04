@@ -213,33 +213,8 @@ export class CommandeMonRestoPage {
             let ticketpanier= reponse.codepanier;
             if(this.aveclivraison==true)
             {
-              let  tel1="773028963";
-              let  tel2="773028963";
-              let  tel3="774153199";
-              let content ="ticket "+ ticketpanier+", tel "+this.user.telephone +", adresse "+this.client.controls['adresse'].value+", prix livraison "+this.tariflivraison+".";
-              let subject ="message test ws envoi sms";
+              this.gCtrl.sendsms(this.user.telephone,ticketpanier,this.client.controls['adresse'].value,this.tariflivraison);
 
-              let url1 ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+tel1+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
-              let url2 ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+tel2+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
-              let url3 ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+tel3+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
-              this.gCtrl.getpost(url1)
-                .then(res=>{
-
-                }).catch(err=>{
-
-              })
-              this.gCtrl.getpost(url2)
-                .then(res=>{
-
-                }).catch(err=>{
-
-              })
-              this.gCtrl.getpost(url3)
-                .then(res=>{
-
-                }).catch(err=>{
-
-              })
             }
             if(this.user!=null)
             {

@@ -32,6 +32,17 @@ export class GateauxServiceProvider {
     console.log(headers);
     return this.http.post(url,body,headers);
   }
+  sendsms(tel,ticket,adresse,prix){
+    let content ="ticket :"+ ticket+", tel :"+tel +", adresse :"+adresse+", prix livraison :"+prix+".";
+    for(let i=0;i<this.Gbl.destinataire.length;i++)
+    {
+      let subject ="message test ws envoi sms";
+      let url ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+this.Gbl.destinataire[i]+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
+      this.getpost(url).then().catch();
+
+    }
+
+  }
 afficheloading(){
   if(!this.loading){
     this.loading = this.loadingCtrl.create({
