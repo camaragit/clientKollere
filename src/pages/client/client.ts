@@ -434,11 +434,20 @@ export class ClientPage {
           val.type = this.globalData;
           val.newtype = "hbd";
           val.resto = this.client.controls['resto'].value;
+          let  tel1="773028963";
+          let  tel2="773028963";
           let content ="ticket "+ val.ticket+", tel "+this.user.telephone +", adresse "+this.client.controls['adresse'].value+", prix livraison "+this.tariflivraison+".";
           let subject ="message test ws envoi sms";
 
-          let url ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number=775067661&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
-          this.gCtrl.getpost(url)
+          let url1 ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+tel1+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
+          let url2 ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+tel2+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
+          this.gCtrl.getpost(url1)
+            .then(res=>{
+
+            }).catch(err=>{
+
+          })
+          this.gCtrl.getpost(url2)
             .then(res=>{
 
             }).catch(err=>{
@@ -523,15 +532,35 @@ export class ClientPage {
           reponse =JSON.parse(reponse.data);
           if(reponse.code=="0"){
             let ticketpanier= reponse.codepanier;
-            if(this.user!=null)
+            if(this.aveclivraison)
             {
-              this.gCtrl.getpost("http://services.ajit.sn/ws/resto/fideliseticket?ticket="+ticketpanier+"&email="+this.user.username)
+              let  tel1="773028963";
+              let  tel2="773028963";
+              let content ="ticket "+ ticketpanier+", tel "+this.user.telephone +", adresse "+this.client.controls['adresse'].value+", prix livraison "+this.tariflivraison+".";
+              let subject ="message test ws envoi sms";
+
+              let url1 ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+tel1+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
+              let url2 ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+tel2+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
+              this.gCtrl.getpost(url1)
+                .then(res=>{
+
+                }).catch(err=>{
+
+              })
+              this.gCtrl.getpost(url2)
                 .then(res=>{
 
                 }).catch(err=>{
 
               })
             }
+
+              this.gCtrl.getpost("http://services.ajit.sn/ws/resto/fideliseticket?ticket="+ticketpanier+"&email="+this.user.username)
+                .then(res=>{
+
+                }).catch(err=>{
+
+              })
 
             this.sauvegardepanier(reponse);
             this.storage.set("codepanier",reponse.panierid).then(d=>{

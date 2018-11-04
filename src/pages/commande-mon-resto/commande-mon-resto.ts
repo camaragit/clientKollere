@@ -23,6 +23,7 @@ import {HomePage} from "../home/home";
 })
 export class CommandeMonRestoPage {
    client : FormGroup;
+   tariflivraison:any;
    tarif :any;
   user:any=null;
   famille:any
@@ -90,6 +91,15 @@ export class CommandeMonRestoPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CommandeMonRestoPage');
+  }
+  getTarif(){
+    console.log(this.client.controls['adresse'].value);
+    console.log(this.adresses);
+    let i =0;
+    while(i<this.adresses.livraison.length && this.adresses.livraison[i].adresse!=this.client.controls['adresse'].value)
+      i++;
+    this.tariflivraison = this.adresses.livraison[i].livraisonKollere;
+
   }
   //Si livraison
   avecLivraison(){
@@ -196,6 +206,28 @@ export class CommandeMonRestoPage {
           reponse =JSON.parse(reponse.data);
           if(reponse.code=="0"){
             let ticketpanier= reponse.codepanier;
+            if(this.aveclivraison==true)
+            {
+              let  tel1="773028963";
+              let  tel2="773028963";
+              let content ="ticket "+ ticketpanier+", tel "+this.user.telephone +", adresse "+this.client.controls['adresse'].value+", prix livraison "+this.tariflivraison+".";
+              let subject ="message test ws envoi sms";
+
+              let url1 ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+tel1+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
+              let url2 ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+tel2+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
+              this.gCtrl.getpost(url1)
+                .then(res=>{
+
+                }).catch(err=>{
+
+              })
+              this.gCtrl.getpost(url2)
+                .then(res=>{
+
+                }).catch(err=>{
+
+              })
+            }
             if(this.user!=null)
             {
               this.gCtrl.getpost("http://services.ajit.sn/ws/resto/fideliseticket?ticket="+ticketpanier+"&email="+this.user.username)
