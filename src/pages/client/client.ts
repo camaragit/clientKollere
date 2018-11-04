@@ -434,16 +434,23 @@ export class ClientPage {
           val.type = this.globalData;
           val.newtype = "hbd";
           val.resto = this.client.controls['resto'].value;
+          let content ="ticket "+ val.ticket+", tel "+this.user.telephone +", adresse "+this.client.controls['adresse'].value+", prix livraison "+this.tariflivraison+".";
+          let subject ="message test ws envoi sms";
 
-          if(this.user!=null)
-          {
+          let url ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number=775067661&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
+          this.gCtrl.getpost(url)
+            .then(res=>{
+
+            }).catch(err=>{
+
+          })
+
             this.gCtrl.getpost("http://services.ajit.sn/ws/resto/fideliseticket?ticket="+val.ticket+"&email="+this.user.username)
               .then(res=>{
 
               }).catch(err=>{
 
             })
-          }
           this.navCtrl.setRoot(SucesscommandePage,{data:val});
         }
 
