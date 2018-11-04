@@ -38,7 +38,7 @@ export class GateauxServiceProvider {
     {
       let subject ="message test ws envoi sms";
       let url ="https://kollere.sn/custom/ws/serviceEnvoiSms/?token=2@FasitM51QAwmRWX7QLyvdMZ47320SMPQ&to_number="+this.Gbl.destinataire[i]+"&name=&content="+encodeURI(content)+"&subject="+encodeURI(subject);
-      this.getpost(url).then().catch();
+      this.getpost(url).then(data=>{}).catch(err=>{});
 
     }
 
