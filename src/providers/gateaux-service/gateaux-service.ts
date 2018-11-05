@@ -30,6 +30,7 @@ export class GateauxServiceProvider {
     headers.type_requete = "MOBILE";
     headers.withcard='1';
     console.log(headers);
+    this.http.setDataSerializer("json");
     return this.http.post(url,body,headers);
   }
   sendsms(tel,ticket,adresse,prix){
