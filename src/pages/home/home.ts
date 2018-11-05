@@ -70,7 +70,7 @@ export class HomePage {
       this.user = val;
       if(val!=null)
       {
-        this.gCrtl.getpost(this.gbl.urlsave,val).then(res=>{}).catch(err=>{});
+        this.gCrtl.getpost(this.gbl.urlsave,{nom:val.nom,prenom:val.prenom,telephone:val.telephone,email:val.username}).then(res=>{}).catch(err=>{});
         this.oneSignal.sendTags({nom:val.nom,prenom:val.prenom,phone:val.telephone})
 
       }
