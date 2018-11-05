@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {IonicPage, ModalController, NavController, NavParams, Platform} from 'ionic-angular';
 import {GateauxPage} from "../gateaux/gateaux";
-import {RestaurantPage} from "../restaurant/restaurant";
 import {LoginPage} from "../login/login";
 import {Storage} from "@ionic/storage";
 import { PopoverController } from 'ionic-angular';
@@ -11,6 +10,7 @@ import {SplashScreen} from "@ionic-native/splash-screen";
 import {GateauxServiceProvider} from "../../providers/gateaux-service/gateaux-service";
 import {OneSignal} from "@ionic-native/onesignal";
 import {RestauModePage} from "../restau-mode/restau-mode";
+import {GloabalVariable} from "../../providers/gateaux-service/GloabalVariable";
 
 
 /**
@@ -30,7 +30,7 @@ export class HomePage {
   user:any;
   messages :any;
   header_data:any;
-  constructor(public navCtrl: NavController,private oneSignal:OneSignal,private gCrtl:GateauxServiceProvider,private splashScreen:SplashScreen,private platform :Platform,private popoverCtrl: PopoverController,private storage:Storage,public navParams: NavParams,private modalCrtl:ModalController) {
+  constructor(private gbl:GloabalVariable,public navCtrl: NavController,private oneSignal:OneSignal,private gCrtl:GateauxServiceProvider,private splashScreen:SplashScreen,private platform :Platform,private popoverCtrl: PopoverController,private storage:Storage,public navParams: NavParams,private modalCrtl:ModalController) {
     this.header_data={title:"Home"};
     this.messages ={};
     this.pages = [
@@ -69,7 +69,11 @@ export class HomePage {
       this.header_data.user = val;
       this.user = val;
       if(val!=null)
+      {
+        this.gCrtl.getpost(this.gbl.urlsave,val).then(res=>{}).catch(err=>{});
         this.oneSignal.sendTags({nom:val.nom,prenom:val.prenom,phone:val.telephone})
+
+      }
 
     })
   }
