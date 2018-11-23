@@ -95,6 +95,7 @@ export class FamillePage {
           this.gCrtl.showToast("Probleme de connexion");
         })
       }
+      //Par resto
       else{
         let  url = "http://services.ajit.sn/ws/resto/tarifsrestoitem?item="+encodeURI(item)+"&commerce="+encodeURI(this.restaurant);
         console.log(url)

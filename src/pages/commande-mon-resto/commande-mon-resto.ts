@@ -47,7 +47,7 @@ export class CommandeMonRestoPage {
     this.prixkollereUnit = this.tarif[0].valeurItem.prixKollere;
     this.client.controls['resto'].setValue(this.navParams.get('resto'));
     this.client.controls['quantite'].setValue(1)
-    this.client.controls['prixboutique'].setValue(this.prixkollereUnit);
+    this.client.controls['prixboutique'].setValue(this.prixboutiqueUnit);
     this.client.controls['prixkollere'].setValue(this.prixkollereUnit);
     let pourcentage = ((this.client.controls['prixkollere'].value*1) * 100 / (this.client.controls['prixboutique'].value*1))*1;
     // console.log("POURCENTAGE VAUT =====>"+pourcentage)
