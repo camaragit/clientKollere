@@ -42,7 +42,6 @@ logout(){
   checkvaliditecarte(){
     let url = "http://services.ajit.sn/ws/resto/abonnement?numtel="+this.user.telephone;
     this.gCrtl.afficheloading();
-    this.viewCrlt.dismiss();
     this.gCrtl.getpost(url).then(data=>{
       this.gCrtl.dismissloadin();
       let val = JSON.parse(data.data)
