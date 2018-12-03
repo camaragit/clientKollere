@@ -31,7 +31,7 @@
     "@ionic-native/wheel-selector": "^4.16.0",
     "@ionic/pro": "2.0.3",
     "@ionic/storage": "2.2.0",
-    "cordova-android": "7.0.0",
+    "cordova-android": "7.1.4",
     "cordova-plugin-advanced-http": "^2.0.1",
     "cordova-plugin-badge": "^0.8.7",
     "cordova-plugin-device": "^2.0.2",
