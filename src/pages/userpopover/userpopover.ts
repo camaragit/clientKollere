@@ -47,6 +47,7 @@ logout(){
       let val = JSON.parse(data.data)
       console.log(JSON.stringify(data));
       if(val.code=="0"){
+        //test
         let message = val.validite*1 > 0 ? val.prenom +" "+val.nom+" votre carte expire dans "+val.validite+"jour(s)": val.prenom +" "+val.nom+" votre abonnement a expiré";
         this.gCrtl.showAlert(message)
       }
